@@ -10,17 +10,17 @@ using System.Web.Http;
 
 namespace EmployeeTask.Controllers
 {
-    public class EmployeeController : ApiController
+    public class EmployeesController : ApiController
     {
         private SqlUtility util;
-        public EmployeeController()
+        public EmployeesController()
         {
             util = new SqlUtility();
         }
 
         //GET api/employee
         [HttpGet]
-        public IHttpActionResult GetEmployees()
+        public IHttpActionResult GetEmployee()
         {
             try
             {
@@ -102,7 +102,7 @@ namespace EmployeeTask.Controllers
 
         //POST api/employee
         [HttpPost]
-        public IHttpActionResult CreatePatient(EmployeeModel employee)
+        public IHttpActionResult CreateEmployee(EmployeeModel employee)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -112,6 +112,11 @@ namespace EmployeeTask.Controllers
                 parameters.Add(new SqlParameter("@FirstName", SqlDbType.VarChar, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.FirstName));
                 parameters.Add(new SqlParameter("@LastName", SqlDbType.VarChar, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.LastName));
                 parameters.Add(new SqlParameter("@Gender", SqlDbType.Bit, -1, ParameterDirection.Input, true, 2, 2, "", DataRowVersion.Current, employee.Gender));
+                parameters.Add(new SqlParameter("@Dob", SqlDbType.Date, -1, ParameterDirection.Input, true, 2, 2, "", DataRowVersion.Current, employee.Dob));
+                parameters.Add(new SqlParameter("@Doj", SqlDbType.Date, -1, ParameterDirection.Input, true, 2, 2, "", DataRowVersion.Current, employee.Doj));
+                parameters.Add(new SqlParameter("@QualificationId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.QualificationId));
+                parameters.Add(new SqlParameter("@DepartmentId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.DepartmentId));
+                parameters.Add(new SqlParameter("@ManagerId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.ManagerId));
 
                 var result = util.executeSproc("SP_Empployee_Insert", parameters);
 
@@ -132,11 +137,16 @@ namespace EmployeeTask.Controllers
             try
             {
                 var parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("@PatientId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Default, masterParam.PatientId));
-                parameters.Add(new SqlParameter("@PatientName", SqlDbType.VarChar, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, masterParam.PatientName));
-                parameters.Add(new SqlParameter("@PatientAddress", SqlDbType.VarChar, -1, ParameterDirection.Input, true, 2, 2, "", DataRowVersion.Current, masterParam.PatientAddress));
+                parameters.Add(new SqlParameter("@FirstName", SqlDbType.VarChar, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.FirstName));
+                parameters.Add(new SqlParameter("@LastName", SqlDbType.VarChar, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.LastName));
+                parameters.Add(new SqlParameter("@Gender", SqlDbType.Bit, -1, ParameterDirection.Input, true, 2, 2, "", DataRowVersion.Current, employee.Gender));
+                parameters.Add(new SqlParameter("@Dob", SqlDbType.Date, -1, ParameterDirection.Input, true, 2, 2, "", DataRowVersion.Current, employee.Dob));
+                parameters.Add(new SqlParameter("@Doj", SqlDbType.Date, -1, ParameterDirection.Input, true, 2, 2, "", DataRowVersion.Current, employee.Doj));
+                parameters.Add(new SqlParameter("@QualificationId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.QualificationId));
+                parameters.Add(new SqlParameter("@DepartmentId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.DepartmentId));
+                parameters.Add(new SqlParameter("@ManagerId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.ManagerId));
 
-                var result = util.executeSproc("SP_PatientMaster_Update", parameters);
+                var result = util.executeSproc("SP_Employee_Update", parameters);
 
                 return Ok(new { results = employee });
             }

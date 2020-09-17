@@ -9,7 +9,6 @@ namespace EmployeeTask
     {
         public static void Register(HttpConfiguration config)
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register);
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
