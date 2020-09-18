@@ -40,7 +40,8 @@ namespace EmployeeTask.Controllers
                                        eQualificationName = row["QualificationName"],
                                        eDepartmentId = row["DepartmentId"],
                                        eDepartmentName = row["DepartmentName"],
-                                       eDesignation = row["Designation"],
+                                       eDesignationId = row["DesignationId"],
+                                       eDesignation = row["DesignationName"],
                                        emId = row["ManagerId"],
                                        emFirstName = row["ManagerFirstName"],
                                        emLastName = row["ManagerLastName"],
@@ -117,6 +118,7 @@ namespace EmployeeTask.Controllers
                 parameters.Add(new SqlParameter("@QualificationId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.QualificationId));
                 parameters.Add(new SqlParameter("@DepartmentId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.DepartmentId));
                 parameters.Add(new SqlParameter("@ManagerId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.ManagerId));
+                parameters.Add(new SqlParameter("@DesignationId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.DesignationId));
 
                 var result = util.executeSproc("SP_Empployee_Insert", parameters);
 
@@ -145,6 +147,7 @@ namespace EmployeeTask.Controllers
                 parameters.Add(new SqlParameter("@QualificationId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.QualificationId));
                 parameters.Add(new SqlParameter("@DepartmentId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.DepartmentId));
                 parameters.Add(new SqlParameter("@ManagerId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.ManagerId));
+                parameters.Add(new SqlParameter("@DesignationId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.DesignationId));
 
                 var result = util.executeSproc("SP_Employee_Update", parameters);
 

@@ -1,7 +1,25 @@
-﻿
-@{
-    ViewBag.Title = "Employee";
-}
-
-<h2>Employee</h2>
-
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>S.No.</th>
+            <th>Employee Name</th>
+            <th>Manager Name</th>
+            <th>Data of Joining</th>
+            <th>Department</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="employee in employees">
+            <td>{{$index+1}}</td>
+            <td>{{employee.eFirstName + ' ' + employee.eLastName}}</td>
+            <td>{{employee.emFirstName + ' ' + employee.emLastName}}</td>
+            <td>{{employee.eDoj | date:'longDate'}}</td>
+            <td>{{employee.eDepartmentName}}</td>
+            <td>
+                <a onmouseover="this.style.cursor='pointer'" ng-click="#">Edit</a> |
+                <a onmouseover="this.style.cursor='pointer'" ng-click="deleteEmployee(employee.eId)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

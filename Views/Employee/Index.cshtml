@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Employee";
+}
+
+<h2>Employee Master</h2>
+
+<div ng-controller="employeeController">
+    @Html.Partial("Create")
+    <hr />
+    @Html.Partial("Employee")
+
+</div>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/AngularJs/employee.js")    
+}
