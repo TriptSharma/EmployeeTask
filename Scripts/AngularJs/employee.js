@@ -1,17 +1,9 @@
 ﻿app.controller("employeeController", function ($scope, $http, $log) {
+    $scope.newEmployee = null;
 
-    /*$scope.firstName = null;
-    $scope.lastName = null;
-    $scope.dob = new Date();
-    $scope.doj = new Date();
-    $scope.gender = new Boolean();
-    $scope.qualificationId = 0;
-    $scope.departmentId = 0;
-    $scope.departmentName = 0;
-    $scope.managerId = 0;
-    $scope.mFirstName = null;
-    $scope.mLastName = null;
-*/
+    $scope.resetForm = function () {
+        $scope.newEmployee = null;
+    }
 
     $scope.getEmployees = function () {
 
@@ -62,30 +54,42 @@
             );
     }
 
-    /*$scope.createEmployee = function () {
-        var emp = $scope.newEmployee;
-        emp.ManagerId = emp.manager.
-
+    $scope.createEmployee = function () {
         $http({
             method: "POST",
             url: "https://localhost:44321/api/employees",
-            data: emp
-        }).success(function (response) {
-            $scope.getEmployee();
+            data: $scope.newEmployee
+        }).then(function (response) {
+            $scope.getEmployees();
             $log.info;
-        }).error(function (response) {
+        }).then(function (response) {
             $scope.error = response.data;
             $log.info;
         })
 
-    };*/
+    };
+
+    $scope.updateEmployee = function () {
+        $http({
+            method: "PUT",
+            url: "https://localhost:44321/api/employees",
+            data: $scope.newEmployee
+        }).then(function (response) {
+            $scope.getEmployees();
+            $log.info;
+        }).then(function (response) {
+            $scope.error = response.data;
+            $log.info;
+        })
+
+    };
 
     $scope.deleteEmployee = function (id) {
         $http.delete("https://localhost:44321/api/employees/" + id)
-            .success(function (response) {
-                $scope.getEmployee();
+            .then(function (response) {
+                $scope.getEmployees();
                 $log.info;
-            }).error(function (response) {
+            }).then(function (response) {
                 $log.info;
             })
     };

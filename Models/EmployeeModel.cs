@@ -14,13 +14,8 @@ namespace EmployeeTask.Models
         public DateTime Dob { get; set; }
         public DateTime Doj { get; set; }
         public int QualificationId { get; set; }
-        public string QualificationName { get; set; }
         public int DepartmentId { get; set; }
-        public string DepartmentName { get; set; }
         public int DesignationId { get; set; }
-        public string DesignationName { get; set; }
         public int ManagerId { get; set; }
-        public string ManagerFirstName { get; set; }
-        public string ManagerLastName { get; set; }
     }
 }

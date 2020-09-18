@@ -31,7 +31,7 @@ namespace EmployeeTask.Controllers.api
                                        select new
                                        {
                                            designationId = row["DesignationId"],
-                                           designationName = row["DesingationName"]
+                                           designationName = row["DesignationName"]
                                        };
                     return Ok(new { result = designations });
                 }

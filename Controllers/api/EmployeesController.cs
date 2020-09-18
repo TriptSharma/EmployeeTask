@@ -18,7 +18,7 @@ namespace EmployeeTask.Controllers
             util = new SqlUtility();
         }
 
-        //GET api/employee
+        //GET api/employees
         [HttpGet]
         public IHttpActionResult GetEmployee()
         {
@@ -41,7 +41,7 @@ namespace EmployeeTask.Controllers
                                        eDepartmentId = row["DepartmentId"],
                                        eDepartmentName = row["DepartmentName"],
                                        eDesignationId = row["DesignationId"],
-                                       eDesignation = row["DesignationName"],
+                                       eDesignationName = row["DesignationName"],
                                        emId = row["ManagerId"],
                                        emFirstName = row["ManagerFirstName"],
                                        emLastName = row["ManagerLastName"],
@@ -120,7 +120,7 @@ namespace EmployeeTask.Controllers
                 parameters.Add(new SqlParameter("@ManagerId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.ManagerId));
                 parameters.Add(new SqlParameter("@DesignationId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.DesignationId));
 
-                var result = util.executeSproc("SP_Empployee_Insert", parameters);
+                var result = util.executeSproc("SP_Employee_Insert", parameters);
 
                 return Created("patientMasters/" + employee.EmployeeId, new { results = "Created" });
             }

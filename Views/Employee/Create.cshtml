@@ -5,53 +5,93 @@
         <div class="flex-container">
             <div class="column form-group">
                 <label>First Name</label>
-                <input type="text" class="form-control" ng-model="newEmployee.firstName" />
+                <input type="text" class="form-control" ng-model="newEmployee.FirstName" />
             </div>
 
             <div class="column form-group">
                 <label>Last Name</label>
-                <input type="text" class="form-control" ng-model="newEmployee.lastName" />
+                <input type="text" class="form-control" ng-model="newEmployee.LastName" />
             </div>
         </div>
 
         <div class="flex-container">
-            <div class="column">
+            <div class="column form-group">
                 <label>Date of Birth</label>
-                <input type="date" class="form-control" ng-model="newEmployee.dob" />
+                <input type="date" class="form-control" ng-model="newEmployee.Dob" />
             </div>
 
             <div class="column form-group">
                 <label>Gender</label><br />
-                Male <input type="radio" value="0" class="form-control" ng-model="newEmployee.gender">
-                Female <input type="radio" value="1" class="form-control" ng-model="newEmployee.gender">
+                Male <input type="radio" value="false" class="" ng-model="newEmployee.Gender">
+                Female <input type="radio" value="true" class="" ng-model="newEmployee.Gender">
             </div>
         </div>
 
         <div class="column form-group">
             <label>Qualification</label><br />
-            <select ng-model="newEmployee.qualificationId" ng-options="qualification.qualificationName for qualification in qualifications" class="form-control"></select>
+            <select ng-model="newEmployee.QualificationId" class="form-control">
+                <option value="">--Select--</option>
+                <option ng-repeat="q in qualifications" value="{{q.qualificationId}}">
+                    {{q.qualificationName}}
+                </option>
+            </select>
         </div>
 
         @*<div class="column form-group">
-                <label>Qualification</label><br />
-                <select ng-model="newEmployee.departmentId" ng-options="qualification.qualificationName for qualification in qualifications" class="form-control"></select>
-            </div>*@
+            <label>Qualification</label><br />
+            <select ng-model="newEmployee.departmentId" ng-options="qualification.qualificationName for qualification in qualifications" class="form-control"></select>
+        </div>*@
 
         <div class="form-group">
             <label>Date of Joining</label>
-            <input type="date" class="form-control" ng-model="newEmployee.doj" />
+            <input type="date" class="form-control" ng-model="newEmployee.Doj" />
+        </div>
+
+        <div class="flex-container">
+
+            <div class="column form-group">
+                <label>Department</label>
+                <select ng-model="newEmployee.DepartmentId" class="form-control">
+                    <option value="">--Select--</option>
+                    <option ng-repeat="d in departments" value="{{d.departmentId}}">
+                        {{d.departmentName}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="column form-group">
+                <label>Designation</label>
+                <select ng-model="newEmployee.DesignationId" class="form-control">
+                    <option value="">--Select--</option>
+                    <option ng-repeat="d in designations" value="{{d.designationId}}">
+                        {{d.designationName}}
+                    </option>
+                </select>
+            </div>
         </div>
 
         <div class="column form-group">
             <label>Reporting Manager</label>
-            <select ng-model="newEmployee.managerId" ng-options="employee.eFirstName+' '+employee.eLastName for employee in employees" class="form-control"></select>
+            <select ng-model="newEmployee.ManagerId" class="form-control">
+                <option value="">--Select--</option>
+                <option ng-repeat="employee in employees" value="{{employee.eId}}">
+                    {{employee.eFirstName+' '+employee.eLastName}}
+                </option>
+            </select>
         </div>
 
+        @Html.AntiForgeryToken()
+        <div class="submit form-group">
+            <span >
+                <input type="submit" value="Create" class="btn btn-success" ng-click="createEmployee()" />
+            </span>
+            <span >
+                <input type="submit" value="Cancel" class="btn btn-danger" ng-click="resetForm()" />
+            </span>
+        </div>
 
 
 
     </form>
 
-    {{newEmployee.firstName}}, {{newEmployee.lastName}}, {{newEmployee.dob}}, {{newEmployee.gender}}, {{newEmployee.qualificationId}}
-    {{newEmployee.doj}}, {{newEmployee.managerId}}
 </div>

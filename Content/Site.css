@@ -38,3 +38,14 @@ textarea {
 .flex-container .column.bg-alt {
     background: #b4bac0;
 }
+
+.submit {
+text-align:center
+
+}
+
+#searchBox {
+    display: inline-block;
+    text-align: left;
+    float: right;
+}

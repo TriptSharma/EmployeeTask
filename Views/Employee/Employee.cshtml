@@ -1,4 +1,8 @@
-﻿<table class="table">
+﻿<div id="searchBox">
+    <input  class="form-control" ng-model="searchQuery" placeholder="Search Grid"/>
+</div>
+
+<table class="table">
     <thead>
         <tr>
             <th>S.No.</th>
@@ -6,18 +10,20 @@
             <th>Manager Name</th>
             <th>Data of Joining</th>
             <th>Department</th>
+            <th>Designation</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="employee in employees">
+        <tr ng-repeat="employee in employees | filter:searchQuery">
             <td>{{$index+1}}</td>
             <td>{{employee.eFirstName + ' ' + employee.eLastName}}</td>
             <td>{{employee.emFirstName + ' ' + employee.emLastName}}</td>
             <td>{{employee.eDoj | date:'longDate'}}</td>
             <td>{{employee.eDepartmentName}}</td>
+            <td>{{employee.eDesignationName}}</td>
             <td>
-                <a onmouseover="this.style.cursor='pointer'" ng-click="#">Edit</a> |
+                <a onmouseover="this.style.cursor='pointer'" ng-click="fillForm(employee.eId)">Edit</a> |
                 <a onmouseover="this.style.cursor='pointer'" ng-click="deleteEmployee(employee.eId)">Delete</a>
             </td>
         </tr>
