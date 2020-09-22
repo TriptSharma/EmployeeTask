@@ -17,13 +17,14 @@
         <div class="flex-container">
             <div class="column form-group">
                 <label>Date of Birth</label>
-                <input type="date" class="form-control" ng-model="newEmployee.Dob" />
+                <input type="date" class="form-control" ng-model="newEmployee.Dob"">
             </div>
 
             <div class="column form-group">
-                <label>Gender</label><br />
-                Male <input type="radio" value="false" class="" ng-model="newEmployee.Gender">
-                Female <input type="radio" value="true" class="" ng-model="newEmployee.Gender">
+                <label>Gender</label>
+                <br />
+                Male <input type="radio" ng-value="false" class="" ng-model="newEmployee.Gender">
+                Female <input type="radio" ng-value="true" class="" ng-model="newEmployee.Gender">
             </div>
         </div>
 
@@ -31,8 +32,8 @@
             <label>Qualification</label><br />
             <select ng-model="newEmployee.QualificationId" class="form-control">
                 <option value="">--Select--</option>
-                <option ng-repeat="q in qualifications" value="{{q.qualificationId}}">
-                    {{q.qualificationName}}
+                <option ng-selected="q.QualificationId==newEmployee.QualificationId" ng-repeat="q in qualifications" value="{{q.QualificationId}}">
+                    {{q.QualificationName}}
                 </option>
             </select>
         </div>
@@ -44,7 +45,7 @@
 
         <div class="form-group">
             <label>Date of Joining</label>
-            <input type="date" class="form-control" ng-model="newEmployee.Doj" />
+            <input type="date" class="form-control" ng-model="newEmployee.Doj"/>
         </div>
 
         <div class="flex-container">
@@ -53,8 +54,8 @@
                 <label>Department</label>
                 <select ng-model="newEmployee.DepartmentId" class="form-control">
                     <option value="">--Select--</option>
-                    <option ng-repeat="d in departments" value="{{d.departmentId}}">
-                        {{d.departmentName}}
+                    <option ng-selected="d.DepartmentId==newEmployee.DepartmentId" ng-repeat="d in departments" value="{{d.DepartmentId}}">
+                        {{d.DepartmentName}}
                     </option>
                 </select>
             </div>
@@ -63,8 +64,8 @@
                 <label>Designation</label>
                 <select ng-model="newEmployee.DesignationId" class="form-control">
                     <option value="">--Select--</option>
-                    <option ng-repeat="d in designations" value="{{d.designationId}}">
-                        {{d.designationName}}
+                    <option ng-selected="d.DesignationId==newEmployee.DesignationId" ng-repeat="d in designations" value="{{d.DesignationId}}">
+                        {{d.DesignationName}}
                     </option>
                 </select>
             </div>
@@ -74,22 +75,22 @@
             <label>Reporting Manager</label>
             <select ng-model="newEmployee.ManagerId" class="form-control">
                 <option value="">--Select--</option>
-                <option ng-repeat="employee in employees" value="{{employee.eId}}">
-                    {{employee.eFirstName+' '+employee.eLastName}}
+                <option ng-selected="employee.EmployeeId==newEmployee.ManagerId" ng-repeat="employee in employees" value="{{employee.EmployeeId}}">
+                    {{employee.FirstName+' '+employee.LastName}}
                 </option>
             </select>
         </div>
 
         @Html.AntiForgeryToken()
         <div class="submit form-group">
-            <span >
-                <input type="submit" value="Create" class="btn btn-success" ng-click="createEmployee()" />
+            <span>
+                <input type="submit" value={{createFormButton}} ng-if='createFormButton=="Create"' class="btn btn-success" ng-click="createEmployee()" />
+                <input type="submit" value={{createFormButton}} ng-if='createFormButton=="Update"' class="btn btn-warning" ng-click="updateEmployee()" />
             </span>
-            <span >
+            <span>
                 <input type="submit" value="Cancel" class="btn btn-danger" ng-click="resetForm()" />
             </span>
         </div>
-
 
 
     </form>

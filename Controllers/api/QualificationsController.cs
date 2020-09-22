@@ -30,8 +30,8 @@ namespace EmployeeTask.Controllers.api
                     var employees = from DataRow row in result.Rows
                                     select new
                                     {
-                                        qualificationId = row["QualificationId"],
-                                        qualificationName = row["QualificationName"]
+                                        QualificationId = row["QualificationId"],
+                                        QualificationName = row["QualificationName"]
                                     };
                     return Ok(new { result = employees });
                 }

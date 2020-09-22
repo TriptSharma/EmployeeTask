@@ -17,14 +17,14 @@
     <tbody>
         <tr ng-repeat="employee in employees | filter:searchQuery">
             <td>{{$index+1}}</td>
-            <td>{{employee.eFirstName + ' ' + employee.eLastName}}</td>
-            <td>{{employee.emFirstName + ' ' + employee.emLastName}}</td>
-            <td>{{employee.eDoj | date:'longDate'}}</td>
-            <td>{{employee.eDepartmentName}}</td>
-            <td>{{employee.eDesignationName}}</td>
+            <td>{{employee.FirstName + ' ' + employee.LastName}}</td>
+            <td>{{employee.ManagerFirstName + ' ' + employee.ManagerLastName}}</td>
+            <td>{{employee.Doj | date:'longDate'}}</td>
+            <td>{{employee.DepartmentName}}</td>
+            <td>{{employee.DesignationName}}</td>
             <td>
-                <a onmouseover="this.style.cursor='pointer'" ng-click="fillForm(employee.eId)">Edit</a> |
-                <a onmouseover="this.style.cursor='pointer'" ng-click="deleteEmployee(employee.eId)">Delete</a>
+                <a onmouseover="this.style.cursor='pointer'" ng-click="fillForm(employee)">Edit</a> |
+                <a onmouseover="this.style.cursor='pointer'" ng-click="deleteEmployee(employee.EmployeeId)">Delete</a>
             </td>
         </tr>
     </tbody>

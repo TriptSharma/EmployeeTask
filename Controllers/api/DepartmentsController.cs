@@ -31,8 +31,8 @@ namespace EmployeeTask.Controllers.api
                     var departments = from DataRow row in result.Rows
                                       select new
                                       {
-                                          departmentId = row["DepartmentId"],
-                                          departmentName = row["DepartmentName"]
+                                          DepartmentId = row["DepartmentId"],
+                                          DepartmentName = row["DepartmentName"]
                                       };
                     return Ok(new { result = departments });
                 }

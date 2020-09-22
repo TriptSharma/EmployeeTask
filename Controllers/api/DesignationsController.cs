@@ -30,8 +30,8 @@ namespace EmployeeTask.Controllers.api
                     var designations = from DataRow row in result.Rows
                                        select new
                                        {
-                                           designationId = row["DesignationId"],
-                                           designationName = row["DesignationName"]
+                                           DesignationId = row["DesignationId"],
+                                           DesignationName = row["DesignationName"]
                                        };
                     return Ok(new { result = designations });
                 }

@@ -30,21 +30,21 @@ namespace EmployeeTask.Controllers
                     var employees = from DataRow row in result.Rows
                                    select new
                                    {
-                                       eId = row["EmployeeId"],
-                                       eFirstName = row["FirstName"],
-                                       eLastName = row["LastName"],
-                                       eGender = row["Gender"],
-                                       eDob = row["Dob"],
-                                       eDoj = row["Doj"],
-                                       eQualificationId = row["QualificationId"],
-                                       eQualificationName = row["QualificationName"],
-                                       eDepartmentId = row["DepartmentId"],
-                                       eDepartmentName = row["DepartmentName"],
-                                       eDesignationId = row["DesignationId"],
-                                       eDesignationName = row["DesignationName"],
-                                       emId = row["ManagerId"],
-                                       emFirstName = row["ManagerFirstName"],
-                                       emLastName = row["ManagerLastName"],
+                                       EmployeeId = row["EmployeeId"],
+                                       FirstName = row["FirstName"],
+                                       LastName = row["LastName"],
+                                       Gender = row["Gender"],
+                                       Dob = row["Dob"],
+                                       Doj = row["Doj"],
+                                       QualificationId = row["QualificationId"],
+                                       QualificationName = row["QualificationName"],
+                                       DepartmentId = row["DepartmentId"],
+                                       DepartmentName = row["DepartmentName"],
+                                       DesignationId = row["DesignationId"],
+                                       DesignationName = row["DesignationName"],
+                                       ManagerId = row["ManagerId"],
+                                       ManagerFirstName = row["ManagerFirstName"],
+                                       ManagerLastName = row["ManagerLastName"],
                                    };
                     return Ok(new { result = employees });
                 }
@@ -59,47 +59,49 @@ namespace EmployeeTask.Controllers
             }
         }
 
-        /*//GET api/patientMasters/1
         [HttpGet]
         public IHttpActionResult GetEmployee(int id)
         {
             try
             {
-                var parameters = new List<SqlParameter>();
+                List<SqlParameter> parameters = new List<SqlParameter>() { };
                 parameters.Add(new SqlParameter("@EmployeeId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Default, id));
-
-                var result = util.executeSproc("SP_Employee_Read", parameters);
-
+                
+                DataTable result = util.executeSproc("SP_Employee_Read", parameters);
                 if (result.Rows.Count > 0)
                 {
                     var employee = from DataRow row in result.Rows
-                                   select new
-                                   {
-                                       eId = row["EmployeeId"],
-                                       eFirstName = row["FirstName"],
-                                       eLastName = row["LastName"],
-                                       eGender = row["Gender"],
-                                       eDob = row["Dob"],
-                                       eDoj = row["Doj"],
-                                       eQualificationId = row["QualificationId"],
-                                       eQualificationName = row["QualificationName"],
-                                       eDepartmentId = row["DepartmentId"],
-                                       eDepartmentName = row["DepartmentName"],
-                                       eDesignation = row["Designation"],
-                                       emId = row["ManagerId"],
-                                       emFirstName = row["ManagerFirstName"],
-                                       emLastName = row["ManagerLastName"],
-                                  };
+                                    select new
+                                    {
+                                        EmployeeId = row["EmployeeId"],
+                                        FirstName = row["FirstName"],
+                                        LastName = row["LastName"],
+                                        Gender = row["Gender"],
+                                        Dob = row["Dob"],
+                                        Doj = row["Doj"],
+                                        QualificationId = row["QualificationId"],
+                                        QualificationName = row["QualificationName"],
+                                        DepartmentId = row["DepartmentId"],
+                                        DepartmentName = row["DepartmentName"],
+                                        DesignationId = row["DesignationId"],
+                                        DesignationName = row["DesignationName"],
+                                        ManagerId = row["ManagerId"],
+                                        ManagerFirstName = row["ManagerFirstName"],
+                                        ManagerLastName = row["ManagerLastName"],
+                                    };
                     return Ok(new { result = employee });
                 }
                 else
-                    return BadRequest();
+                {
+                    return Ok(new { result = 0 });
+                }
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
-        }*/
+        }
+
 
         //POST api/employee
         [HttpPost]
@@ -139,6 +141,7 @@ namespace EmployeeTask.Controllers
             try
             {
                 var parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@EmployeeId", SqlDbType.Int, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.EmployeeId));
                 parameters.Add(new SqlParameter("@FirstName", SqlDbType.VarChar, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.FirstName));
                 parameters.Add(new SqlParameter("@LastName", SqlDbType.VarChar, -1, ParameterDirection.Input, false, 2, 2, "", DataRowVersion.Current, employee.LastName));
                 parameters.Add(new SqlParameter("@Gender", SqlDbType.Bit, -1, ParameterDirection.Input, true, 2, 2, "", DataRowVersion.Current, employee.Gender));
